@@ -1,0 +1,20 @@
+Training Results:
+
+train_runtime: 1249.5563
+train_samples_per_second: 768.273
+train_steps_per_second: 24.009
+total_flos: 3.157389361152e+16
+train_loss: 0.13352942485809327
+epoch: 5.0
+
+Test Results:
+
+eval_accuracy: 0.9486842105263158
+eval_precision: 0.9490648927590875
+eval_recall: 0.9486842105263157
+eval_f1: 0.9487412331172591
+eval_loss: 0.16817420721054077
+eval_model_preparation_time: 0.002
+eval_runtime: 5.3194
+eval_samples_per_second: 1428.731
+eval_steps_per_second: 44.742
