@@ -87,7 +87,7 @@ python textshield/train_evaluate_detector.py --dataset imdb --model roberta --at
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
+   git clone [<repository-url>](https://github.com/ReDASers/representation-stability)
    cd submission
    ```
 
@@ -215,5 +215,6 @@ If you use this code, please cite our work:
 For questions or issues, please open a GitHub issue or contact the authors.
 
 ## License
+
 
 This code is provided for academic research purposes.
