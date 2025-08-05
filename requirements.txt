@@ -1,0 +1,25 @@
+# Core ML and NLP libraries
+torch>=2.7.1
+transformers>=4.54.0
+datasets>=4.0.0
+huggingface-hub>=0.34.1
+
+# Data manipulation and analysis
+numpy>=2.1.2
+pandas>=2.3.1
+scikit-learn>=1.7.1
+scipy>=1.16.0
+
+# Visualization
+matplotlib>=3.10.3
+seaborn>=0.13.2
+
+# Text processing
+nltk>=3.9.1
+regex>=2024.11.6
+
+# Progress bars and utilities
+tqdm>=4.67.1
+
+# Statistical modeling
+statsmodels>=0.14.5
