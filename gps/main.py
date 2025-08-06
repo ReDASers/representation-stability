@@ -1,8 +1,8 @@
 """
-Guided Perturbation Sensitivity (GPS) System - Main Entry Point
+Representation Stability (RS) System - Main Entry Point
 
-This module implements the main entry point for the GPS adversarial detection system.
-The GPS system detects adversarial text examples by analyzing word-level sensitivity
+This module implements the main entry point for the RS adversarial detection system.
+The RS system detects adversarial text examples by analyzing word-level sensitivity
 patterns through guided perturbations based on different importance metrics.
 
 Key Components:
@@ -64,9 +64,9 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def parse_arguments() -> argparse.Namespace:
-    """Parse and validate command-line arguments for GPS experiments.
+    """Parse and validate command-line arguments for RS experiments.
     
-    Configures argument parser with all required options for running GPS
+    Configures argument parser with all required options for running RS
     adversarial detection experiments, including word selection strategies,
     processing parameters, and detection methods.
     
@@ -77,13 +77,15 @@ def parse_arguments() -> argparse.Namespace:
         SystemExit: If required arguments are missing or invalid
     """
     parser = argparse.ArgumentParser(
-        description='Run Guided Perturbation Sensitivity (GPS) adversarial detection experiments',
+        description='Run Representation Stability (RS) adversarial detection experiments',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     
     # Core required arguments
     parser.add_argument('--model_name', type=str, required=True,
                        help='Model name (e.g., roberta_ag_news, deberta_imdb)')
+    parser.add_argument('--model_path', type=str, default=None,
+                       help='Custom model path (HuggingFace model ID or local path). If not provided, defaults to redasers/{model_name}')
     parser.add_argument('--data_dir', type=str, required=True,
                        help='Data directory path (e.g., data/ag_news/roberta/textfooler)')
     parser.add_argument('--output_dir', type=str, default='output',
@@ -198,9 +200,9 @@ def run_word_level_experiment(
     cal_attack_logs_path: Optional[str] = None,
     test_attack_logs_path: Optional[str] = None,
 ) -> Tuple[pd.DataFrame, Dict]:
-    """Execute complete GPS word-level sensitivity experiment pipeline.
+    """Execute complete RS word-level sensitivity experiment pipeline.
     
-    Orchestrates the full GPS adversarial detection workflow by computing word-level
+    Orchestrates the full RS adversarial detection workflow by computing word-level
     sensitivity maps through guided perturbation, extracting discriminative features,
     and training/evaluating multiple detection models.
     
@@ -232,7 +234,7 @@ def run_word_level_experiment(
         ValueError: If datasets lack required columns or are incompatible
         RuntimeError: If GPU memory insufficient for batch processing
     """
-    print(f"\n{'='*80}\nRunning GPS Word-Level Sensitivity Experiment\n{'='*80}")
+    print(f"\n{'='*80}\nRunning RS Word-Level Sensitivity Experiment\n{'='*80}")
     print(f"Distance metric: {args.distance_metric}")
     print(f"Max sequence length: {args.max_length}")
     
@@ -346,7 +348,7 @@ def run_word_level_experiment(
         random_top_n=args.top_n if args.use_random else 10,
     )
     
-    # Step 5: Analyze perturbation overlap between attacks and GPS predictions
+    # Step 5: Analyze perturbation overlap between attacks and RS predictions
     print("Step 5/6: Calculating perturbation overlap metrics...")
     all_metrics, all_plot_data, top_n = _calculate_and_save_perturbation_overlap(
         cal_perturbed_positions=cal_perturbed_positions,
@@ -375,16 +377,16 @@ def run_word_level_experiment(
         random_seed=args.random_seed,
     )
 
-    print(f"\nGPS experiment pipeline completed successfully!")
+    print(f"\nRS experiment pipeline completed successfully!")
     print(f"All results saved to: {exp_results_dir}")
 
     return results_df, detector_results_metrics
 
 
 def main() -> None:
-    """Execute GPS adversarial detection experiment from command-line interface.
+    """Execute RS adversarial detection experiment from command-line interface.
     
-    Main entry point that coordinates the complete GPS experimental workflow:
+    Main entry point that coordinates the complete RS experimental workflow:
     parsing arguments, loading models/data, running experiments, and saving results.
     Includes comprehensive error handling and execution time tracking.
     
@@ -392,7 +394,7 @@ def main() -> None:
         1. Parse and validate command-line arguments
         2. Create organized output directory structure  
         3. Load pre-trained model, tokenizer, and datasets
-        4. Execute GPS word-level sensitivity experiment
+        4. Execute RS word-level sensitivity experiment
         5. Save results and report execution statistics
         
     Raises:
@@ -408,11 +410,11 @@ def main() -> None:
     args = parse_arguments()
     dirs = create_experiment_directories(args)
     
-    print(f"GPS Experiment Configuration: {vars(args)}")
+    print(f"RS Experiment Configuration: {vars(args)}")
     print(f"Output directory: {dirs['root']}")
     
     # Load pre-trained model and tokenizer
-    model_path = os.path.join("models", args.model_name)
+    model_path = args.model_path if args.model_path else f"redasers/{args.model_name}"
     print(f"Loading model components from {model_path}")
     
     try:
@@ -479,9 +481,9 @@ def main() -> None:
     
     # Begin execution timing
     start_time = time.time()
-    print(f"Starting GPS experiment at {time.strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Starting RS experiment at {time.strftime('%Y-%m-%d %H:%M:%S')}")
     
-    # Execute main GPS experiment pipeline with error handling
+    # Execute main RS experiment pipeline with error handling
     try:
         results_df, detector_results = run_word_level_experiment(
             args,
@@ -511,7 +513,7 @@ def main() -> None:
     # Report execution statistics
     elapsed = time.time() - start_time
     print(f"\n{'='*60}")
-    print(f"GPS Experiment Completed Successfully!")
+    print(f"RS Experiment Completed Successfully!")
     print(f"Total execution time: {elapsed:.2f}s ({elapsed/60:.1f} minutes)")
     print(f"Results directory: {dirs['root']}")
     print(f"{'='*60}")

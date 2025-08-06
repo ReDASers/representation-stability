@@ -1,7 +1,7 @@
 """
-Guided Perturbation Sensitivity (GPS) System for Adversarial Text Detection
+Representation Stability (RS) System for Adversarial Text Detection
 
-The GPS system detects adversarial text examples by analyzing word-level sensitivity
+The RS system detects adversarial text examples by analyzing word-level sensitivity
 patterns through guided perturbations based on different importance metrics.
 
 Modules:

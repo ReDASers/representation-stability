@@ -1,6 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
-echo Running GPS Adversarial Detection Experiments with Gradient Strategy and Multiple TOP_N values - bert-attack across Multiple Datasets
+echo Running RS Adversarial Detection Experiments with Gradient Strategy and Multiple TOP_N values - bert-attack across Multiple Datasets
 
 REM Create base output directory if it doesn't exist
 if not exist "output" mkdir "output"

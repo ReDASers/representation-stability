@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 """
-GPS Feature Extraction Script
+RS Feature Extraction Script
 
-A script to extract GPS sensitivity features and save them as JSON files
+A script to extract RS sensitivity features and save them as JSON files
 for use with external detection models.
 
-This script runs the full GPS pipeline but only saves the extracted features
+This script runs the full RS pipeline but only saves the extracted features
 without training any detection models.
 
-Usage:
-    python -m gps.extract_features --model_name roberta_ag_news --data_dir data/ag_news/roberta/textfooler --use_attention --top_n 20
 """
 
 import json
@@ -33,7 +31,7 @@ def load_model_and_data(args):
     """Load model, tokenizer, and datasets."""
     
     # Load model and tokenizer
-    model_path = f"models/{args.model_name}"
+    model_path = args.model_path if args.model_path else f"redasers/{args.model_name}"
     print(f"Loading model from {model_path}")
     
     tokenizer = AutoTokenizer.from_pretrained(model_path, use_fast=True)
@@ -96,10 +94,10 @@ def save_features_as_json(features, labels, output_path, metadata=None):
 
 
 def extract_features_only(args):
-    """Extract GPS features without training models."""
+    """Extract RS features without training models."""
     
     print("="*60)
-    print("GPS FEATURE EXTRACTION MODE")
+    print("RS FEATURE EXTRACTION MODE")
     print("="*60)
     
     # Create experiment directories
@@ -260,13 +258,13 @@ def extract_features_only(args):
 
 def main():
     """Main entry point for feature extraction."""
-    # Parse arguments using the same parser as main GPS
+    # Parse arguments using the same parser as main RS
     args = parse_arguments()
     
     # Run feature extraction
     output_dir = extract_features_only(args)
     
-    print(f"\nGPS feature extraction completed successfully!")
+    print(f"\nRS feature extraction completed successfully!")
     print(f"Features saved to: {output_dir}")
 
 

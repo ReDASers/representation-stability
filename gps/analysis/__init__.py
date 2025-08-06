@@ -1,1 +1,1 @@
-"""Analysis and attribution methods for GPS."""
+"""Analysis and attribution methods for RS."""

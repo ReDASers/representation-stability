@@ -1,1 +1,1 @@
-"""Core algorithms and pipelines for GPS adversarial detection."""
+"""Core algorithms and pipelines for RS adversarial detection."""

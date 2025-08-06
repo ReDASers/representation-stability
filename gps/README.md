@@ -1,6 +1,6 @@
-# Guided Perturbation Sensitivity (GPS) for Adversarial Text Detection
+# Representation Stability (RS) for Adversarial Text Detection
 
-GPS is a novel adversarial text detection system that analyzes word-level sensitivity patterns through guided perturbations based on different importance heuristics. The system detects adversarial examples by examining how model predictions change when words are systematically masked according to attribution methods.
+RS is a novel adversarial text detection system that analyzes word-level sensitivity patterns through guided perturbations based on different importance heuristics. The system detects adversarial examples by examining how model predictions change when words are systematically masked according to attribution methods.
 
 ## Architecture
 
@@ -32,7 +32,7 @@ gps/
 
 ## Method Overview
 
-GPS operates through four key stages:
+RS operates through four key stages:
 
 1. **Word Selection**: Uses attribution methods (attention rollout, integrated gradients, gradient×attention, or random baseline) to rank word importance
 2. **Progressive Perturbation**: Systematically masks top-k words and computes embedding changes
@@ -47,19 +47,33 @@ GPS operates through four key stages:
 - **Gradient×Attention**: Combines gradient and attention information (Grad-SAM)
 - **Random Baseline**: Random word selection for comparison
 
+## Model Configuration
+
+RS supports both default pre-trained models and custom models:
+
+- **Default Models**: Uses fine-tuned models from the `redasers` HuggingFace community (redasers/roberta_ag_news, redasers/deberta_imdb, etc.)
+  - Available models: https://huggingface.co/collections/redasers/representation-stability-689396925331dfaddaf59f09
+- **Custom Models**: Specify any HuggingFace model ID or local model path using `--model_path`
+
 ## Usage
 
 Run experiments on specific datasets:
 
 ```bash
-# AG News dataset with RoBERTa
+# AG News dataset with RoBERTa (uses default redasers/roberta_ag_news from HuggingFace)
 python -m gps --model_name roberta_ag_news --data_dir data/ag_news/roberta/textfooler --use_attention --top_n 20
 
-# IMDB dataset with DeBERTa using gradient attribution
+# IMDB dataset with DeBERTa using gradient attribution (uses default redasers/deberta_imdb from HuggingFace)
 python -m gps --model_name deberta_imdb --data_dir data/imdb/deberta/bert-attack --use_saliency --top_n 20
 
-# Use Grad-SAM strategy
+# Use Grad-SAM strategy (uses default redasers/roberta_yelp from HuggingFace)
 python -m gps --model_name roberta_yelp --data_dir data/yelp/roberta/deepwordbug --use_gradient_attention --top_n 20
+
+# Use a custom model from HuggingFace
+python -m gps --model_name custom_model --model_path your_username/your_model --data_dir data/imdb/roberta/textfooler --use_attention --top_n 20
+
+# Use a local model directory
+python -m gps --model_name local_model --model_path ./path/to/your/local/model --data_dir data/imdb/roberta/textfooler --use_saliency --top_n 20
 ```
 
 Or use the provided batch scripts for comprehensive experiments:
@@ -83,11 +97,14 @@ gps/scripts/run_all_experiments.bat
 
 ## Feature Extraction Only
 
-To extract GPS features without training detection models (for use with external classifiers):
+To extract RS features without training detection models (for use with external classifiers):
 
 ```bash
-# Extract features only - outputs will be saved as JSON files
+# Extract features only - outputs will be saved as JSON files (uses default redasers model)
 python -m gps.extract_features --model_name roberta_ag_news --data_dir data/ag_news/roberta/textfooler --use_attention --top_n 20
+
+# Extract features using a custom model
+python -m gps.extract_features --model_name custom_model --model_path your_username/your_model --data_dir data/ag_news/roberta/textfooler --use_attention --top_n 20
 ```
 
 This creates:
@@ -98,6 +115,7 @@ This creates:
 ## Key Parameters
 
 - `--model_name`: Target model identifier (e.g., `roberta_ag_news`, `deberta_imdb`)
+- `--model_path`: Custom model path (HuggingFace model ID or local path). Optional - defaults to `redasers/{model_name}`
 - `--data_dir`: Path to adversarial attack data
 - `--top_n`: Number of top-ranked words to analyze (default: 20)
 - `--distance_metric`: Embedding distance metric (`cosine`, `euclidean`, `manhattan`)

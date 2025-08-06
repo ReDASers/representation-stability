@@ -1,5 +1,5 @@
 """
-Entry point for running GPS as a module.
+Entry point for running RS as a module.
 Usage: python -m gps [arguments]
 """
 

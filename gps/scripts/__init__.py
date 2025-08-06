@@ -1,1 +1,1 @@
-"""Batch scripts and runners for GPS experiments."""
+"""Batch scripts and runners for RS experiments."""

@@ -1,12 +1,12 @@
-# Guided Perturbation Sensitivity (GPS): Detecting Adversarial Text via Embedding Stability and Word Importance
+# Assessing Representation Stability for Transformer Models
 
-This repository contains the implementation and experimental code for adversarial text detection methods, including our novel **Guided Perturbation Sensitivity (GPS)** approach and implementations of two state-of-the-art baseline methods.
+This repository contains the implementation and experimental code for adversarial text detection methods, including our novel **Representation Stability (RS)** approach and implementations of two state-of-the-art baseline methods.
 
 ## Overview
 
 Adversarial text detection is a critical security challenge in natural language processing. This repository provides:
 
-- **GPS**: Our adversarial detection method using guided perturbation sensitivity analysis
+- **RS**: Our adversarial detection method using representation stability analysis
 - **Sharpness-based Detection**: Implementation of loss landscape sharpness analysis (Zheng et al., ACL 2023)
 - **TextShield**: Implementation of Adaptive Word Importance detection (Shen et al., ICLR 2023)
 
@@ -15,11 +15,11 @@ All methods are evaluated on three datasets (AG News, IMDB, Yelp) with two model
 ## Repository Structure
 
 ```
-submission/
+representation-stability/
 ├── data/                     # Adversarial datasets by dataset/model/attack
 ├── models/                   # Fine-tuned victim models
 ├── output/                   # Experimental results
-├── gps/                      # GPS method implementation
+├── gps/                      # RS method implementation
 ├── sharpness/                # Sharpness-based detection
 ├── textshield/               # TextShield (AWI) implementation
 └── requirements.txt          # Dependencies
@@ -27,7 +27,7 @@ submission/
 
 ## Detection Methods
 
-### 🔬 GPS (Guided Perturbation Sensitivity)
+### 🔬 RS (Representation Stability)
 Our method that analyzes word-level sensitivity patterns through guided perturbations based on attribution methods.
 
 **Key Features:**
@@ -38,7 +38,7 @@ Our method that analyzes word-level sensitivity patterns through guided perturba
 
 **Usage:**
 ```bash
-# Run GPS with attention rollout on AG News
+# Run RS with attention rollout on AG News
 python -m gps --model_name roberta_ag_news --data_dir data/ag_news/roberta/textfooler --use_attention --top_n 20
 
 # Extract features only (for external classifiers)
@@ -105,7 +105,7 @@ python textshield/train_evaluate_detector.py --dataset imdb --model roberta --at
 
 **Option 1: Individual Experiments**
 ```bash
-# GPS with different strategies
+# RS with different strategies
 python -m gps --model_name roberta_imdb --data_dir data/imdb/roberta/textfooler --use_attention --top_n 20
 python -m gps --model_name roberta_imdb --data_dir data/imdb/roberta/textfooler --use_saliency --top_n 20
 
@@ -119,7 +119,7 @@ python textshield/train_evaluate_detector.py --dataset imdb --model roberta --at
 
 **Option 2: Batch Experiments**
 ```bash
-# Run all GPS experiments
+# Run all RS experiments
 gps/scripts/run_all_experiments.bat
 
 # Run all sharpness experiments  
@@ -162,22 +162,11 @@ Results are automatically saved to the `output/` directory with several metrics:
 - **Performance Metrics**: Accuracy, Precision, Recall, F1-score, AUC-ROC
 - **Timing Information**: Training and evaluation time per sample
 - **Method-specific Metrics**: 
-  - GPS: Ranking metrics (MRR, MAP, NDCG), overlap analysis
+  - RS: Ranking metrics (MRR, MAP, NDCG), overlap analysis
   - Sharpness: FOSC convergence, step size adaptation
   - TextShield: Multi-channel AWI feature statistics
 
 ## Citation
-
-If you use this code, please cite our work:
-
-```bibtex
-@inproceedings{your-paper-2024,
-    title={Your Paper Title},
-    author={Your Name and Co-authors},
-    booktitle={Conference/Journal Name},
-    year={2024}
-}
-```
 
 **Baseline Methods:**
 
