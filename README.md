@@ -38,8 +38,11 @@ Our method that analyzes word-level sensitivity patterns through guided perturba
 
 **Usage:**
 ```bash
-# Run RS with attention rollout on AG News
+# Run RS with attention rollout on AG News (uses default redasers/roberta_ag_news)
 python -m gps --model_name roberta_ag_news --data_dir data/ag_news/roberta/textfooler --use_attention --top_n 20
+
+# Use a custom HuggingFace model
+python -m gps --model_name custom_model --model_path microsoft/deberta-base --data_dir data/ag_news/roberta/textfooler --use_attention --top_n 20
 
 # Extract features only (for external classifiers)
 python -m gps.extract_features --model_name roberta_ag_news --data_dir data/ag_news/roberta/textfooler --use_attention --top_n 20
@@ -87,7 +90,7 @@ python textshield/train_evaluate_detector.py --dataset imdb --model roberta --at
 
 1. **Clone the repository:**
    ```bash
-   git clone [<repository-url>](https://github.com/ReDASers/representation-stability)
+   git clone <repository-url>
    cd submission
    ```
 
@@ -145,15 +148,15 @@ data/{dataset}/{model}/{attack}/
 
 ## Models
 
-The system supports both local fine-tuned models and HuggingFace models:
+The system supports both pre-trained HuggingFace models and custom models:
 
-**Local Models** (if available):
-- `models/roberta_{dataset}/`
-- `models/deberta_{dataset}/`
+**Default HuggingFace Models:**
+- Fine-tuned models from the `redasers` community: https://huggingface.co/collections/redasers/representation-stability-689396925331dfaddaf59f09
+- Available models: `redasers/roberta_ag_news`, `redasers/deberta_imdb`, `redasers/roberta_yelp`, etc.
 
-**HuggingFace Fallback:**
-- RoBERTa: `textattack/roberta-base-{dataset}`
-- DeBERTa: `microsoft/deberta-base`
+**Custom Models:**
+- Any HuggingFace model ID (e.g., `microsoft/deberta-base`, `textattack/roberta-base-imdb`)
+- Local model directories using `--model_path` parameter
 
 ## Results and Evaluation
 
@@ -204,6 +207,5 @@ Results are automatically saved to the `output/` directory with several metrics:
 For questions or issues, please open a GitHub issue or contact the authors.
 
 ## License
-
 
 This code is provided for academic research purposes.
