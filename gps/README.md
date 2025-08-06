@@ -34,7 +34,7 @@ gps/
 
 RS operates through four key stages:
 
-1. **Word Selection**: Uses attribution methods (attention rollout, integrated gradients, gradient×attention, or random baseline) to rank word importance
+1. **Word Selection**: Uses attribution methods (Gradients, Attention-Rollout, GRAD-SAM, Random Selection) to rank word importance
 2. **Progressive Perturbation**: Systematically masks top-k words and computes embedding changes
 3. **Sensitivity Feature Extraction**: Extracts distributional and sequential features from sensitivity patterns
 4. **Classification**: Uses BiLSTM with attention to distinguish adversarial from benign examples
@@ -131,3 +131,4 @@ The system generates:
 - **Overlap analysis**: Comparison between attribution methods and ground-truth perturbations
 
 Results are saved to the `output/` directory with detailed CSV reports and performance metrics.
+
