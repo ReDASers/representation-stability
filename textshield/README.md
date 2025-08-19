@@ -201,8 +201,7 @@ The detector works with fine-tuned models in the expected directory structure:
 If you use this implementation, please cite the original TextShield paper:
 
 ```bibtex
-@inproceedings{
-shen2023textshield,
+@inproceedings{shen2023textshield,
 title={TextShield: Beyond Successfully Detecting Adversarial Sentences in text classification},
 author={Lingfeng Shen and Ze Zhang and Haiyun Jiang and Ying Chen},
 booktitle={The Eleventh International Conference on Learning Representations },
@@ -217,4 +216,5 @@ url={https://openreview.net/forum?id=xIWfWvKM7aQ}
 1. **Memory errors**: Reduce `--batch_size` or `--max_token_length`
 2. **Slow Integrated Gradients**: Reduce `--ig_steps` (default: 5)
 3. **Missing features**: Ensure AWI extraction completed successfully before training detectors
+
 4. **Import errors**: Ensure you're running from the main project directory
