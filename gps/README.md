@@ -132,3 +132,18 @@ The system generates:
 
 Results are saved to the `output/` directory with detailed CSV reports and performance metrics.
 
+## Citation
+
+If you use this implementation, please cite the original paper:
+
+```bibtex
+@misc{tuck2025assessingrepresentationstabilitytransformer,
+      title={Assessing Representation Stability for Transformer Models}, 
+      author={Bryan E. Tuck and Rakesh M. Verma},
+      year={2025},
+      eprint={2508.11667},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2508.11667}, 
+}
+```
