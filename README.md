@@ -189,16 +189,34 @@ Results are automatically saved to the `output/` directory with several metrics:
 ```bibtex
 @inproceedings{zheng-etal-2023-detecting,
     title = "Detecting Adversarial Samples through Sharpness of Loss Landscape",
-    author = "Zheng, Rui and others",
-    booktitle = "Findings of ACL 2023",
-    year = "2023"
+    author = "Zheng, Rui  and
+      Dou, Shihan  and
+      Zhou, Yuhao  and
+      Liu, Qin  and
+      Gui, Tao  and
+      Zhang, Qi  and
+      Wei, Zhongyu  and
+      Huang, Xuanjing  and
+      Zhang, Menghan",
+    editor = "Rogers, Anna  and
+      Boyd-Graber, Jordan  and
+      Okazaki, Naoaki",
+    booktitle = "Findings of the Association for Computational Linguistics: ACL 2023",
+    month = jul,
+    year = "2023",
+    address = "Toronto, Canada",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.findings-acl.717/",
+    doi = "10.18653/v1/2023.findings-acl.717",
+    pages = "11282--11298"
 }
 
 @inproceedings{shen2023textshield,
-    title={TextShield: Beyond Successfully Detecting Adversarial Sentences in text classification},
-    author={Lingfeng Shen and Ze Zhang and Haiyun Jiang and Ying Chen},
-    booktitle={ICLR 2023},
-    year={2023}
+title={TextShield: Beyond Successfully Detecting Adversarial Sentences in text classification},
+author={Lingfeng Shen and Ze Zhang and Haiyun Jiang and Ying Chen},
+booktitle={The Eleventh International Conference on Learning Representations},
+year={2023},
+url={https://openreview.net/forum?id=xIWfWvKM7aQ}
 }
 ```
 
@@ -223,3 +241,4 @@ For questions or issues, please open a GitHub issue or contact the authors.
 
 
 This code is provided for academic research purposes.
+
