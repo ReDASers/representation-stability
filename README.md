@@ -171,6 +171,19 @@ Results are automatically saved to the `output/` directory with several metrics:
 
 ## Citation
 
+**RS:**
+```bibtex
+@misc{tuck2025assessingrepresentationstabilitytransformer,
+      title={Assessing Representation Stability for Transformer Models}, 
+      author={Bryan E. Tuck and Rakesh M. Verma},
+      year={2025},
+      eprint={2508.11667},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2508.11667}, 
+}
+```
+
 **Baseline Methods:**
 
 ```bibtex
@@ -207,5 +220,6 @@ Results are automatically saved to the `output/` directory with several metrics:
 For questions or issues, please open a GitHub issue or contact the authors.
 
 ## License
+
 
 This code is provided for academic research purposes.
